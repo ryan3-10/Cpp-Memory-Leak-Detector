@@ -34,28 +34,29 @@ Of course, if you want to once again disable real-time tracking in the middle of
 
 int main() {
     int* num = new int(42);      // Allocation tracked
-    delete num;                  // Deallocation tracked
-    
     int* arr = new int[10];      // Allocation tracked
-    delete[] arr;                // Deallocation tracked
     
     return 0;
 }
 ```
 
-## Output Example
-If a memory leak is detected, the program will output a report similar to:
+Since memory allocations in the above program were not deleted, the Memory Leak Detector will report them with an output similar to this (with variation on the memory locations, of course):
 ```
-1 memory leak found:
+2 memory leaks found:
 ARRAY
-ID: 1
+ID: 2
 Size: 40 bytes
-Starting location: 0x600003eb800
+Starting location: 0x1f69a042710
 
-Total bytes allocated: 40
+SINGLE OBJECT
+ID: 1
+Size: 4 bytes
+Starting location: 0x1f69a0383f0
+
+Total bytes allocated: 44
 Total bytes deleted: 0
-Allocated bytes not yet deleted: 40
-Maximum outstanding allocated bytes at one time: 40
+Allocated bytes not yet deleted: 44
+Maximum outstanding allocated bytes at one time: 44
 ```
 
 ## Notes
